@@ -1,7 +1,10 @@
 let screen = document.querySelector('.calculadora__screen'),
-    operation = '';
+    operation = '',
+    inOperation = false;
+
 const writeScreen = (value) => {
-    screen.value += value;
+    inOperation = false;
+    inOperation ? screen.value = value : screen.value += value;
 
     if(value == '+' ||
         value == '-' ||
@@ -10,9 +13,8 @@ const writeScreen = (value) => {
 
         operation = value;
     }
+
 }
-
-
 
 const runOperation = (operation) => {
     let numbers;
@@ -36,6 +38,8 @@ const runOperation = (operation) => {
         default:
             break;
     }
+
+    inOperation = true;
 }
 
 document.querySelector('.calculadora__buttons').addEventListener('click', e => {
@@ -44,5 +48,4 @@ document.querySelector('.calculadora__buttons').addEventListener('click', e => {
     } else {
         runOperation(operation);
     }
-    //
 })
